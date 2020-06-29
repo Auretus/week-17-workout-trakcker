@@ -5,7 +5,7 @@ module.exports = function (app) {
     Workout.find({})
       .sort({ day: -1 })
       .limit(7)
-      .then((dbWorkouts) => res.json(dbWorkouts))
+      .then((workouts) => res.json(workouts))
       .catch((err) => res.status(400).json(err));
   });
 
@@ -13,19 +13,19 @@ module.exports = function (app) {
     Workout.find({})
       .sort({ day: -1 })
       .limit(7)
-      .then((dbWorkouts) => res.json(dbWorkouts))
+      .then((workouts) => res.json(workouts))
       .catch((err) => res.status(400).json(err));
   });
 
   app.post("/api/workouts", ({ body }, res) => {
     Workout.create(body)
-      .then((dbWorkout) => res.json(dbWorkout))
+      .then((workout) => res.json(workout))
       .catch((err) => res.status(400).json(err));
   });
 
   app.put("/api/workouts/:id", ({ body, params }, res) => {
     Workout.findByIdAndUpdate({ _id: params.id }, { $push: { exercises: body } })
-      .then((dbWorkout) => res.json(dbWorkout))
+      .then((workout) => res.json(workout))
       .catch((err) => res.status(400).json(err));
   });
 };
